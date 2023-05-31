@@ -4,12 +4,12 @@
 #include "ErrorHandling.prg"   ' todo: maybe cannot include a .prg file or no need to include
 #include "Queue.prg"
 
-String cmd_response_string$ = ""
+String cmd_response_string$
 Int32 loop_count
-String command_id$ = ""1
-String command_name$ = ""
-String command_raw$ = ""
-Int32 command_args_count = 0
+String command_id$
+String command_name$
+String command_raw$
+Int32 command_args_count
 String nm_args$(ARGS_UPPER_LIMIT)
 String error_messages$(ERRORMESSAGE_UPPER_LIMIT,ERRORMESSAGE_UPPER_LIMIT)
 

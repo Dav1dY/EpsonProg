@@ -3,6 +3,11 @@
 
 Function Main
 
+    DEV_VENDER$ = "EPSON"
+    DEV_IP$ = "NA"
+    DEV_PROTO_VER$ = "NA"
+    DEV_APP_SW$ = "NA"
+
     Int32 loop_count
     Int32 loop_count2
 

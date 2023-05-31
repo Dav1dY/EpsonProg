@@ -1,10 +1,9 @@
 '!TITLE "Epson robot program"
-'#define <constance> <Strings>
 
-String DEV_VENDER$ = "EPSON"
-String DEV_IP$ = "NA"
-String DEV_PROTO_VER$ = "NA"
-String DEV_APP_SW$ = "NA"
+String DEV_VENDER$
+String DEV_IP$
+String DEV_PROTO_VER$
+String DEV_APP_SW$
 
 #Define ERRORMESSAGE_UPPER_LIMIT   10   
 #Define TIMEOUT_TK_REBOOT	       30000                            'no need to change
@@ -48,7 +47,7 @@ String DEV_APP_SW$ = "NA"
 #Define PARALLEL_IO_OUTPUT_END     3887
 #Define MAXSTRLENGTH               200
 
-#Define CHECK_TASK_STATE(x)        TaskState(x) = 0 Or TaskState(x) = 5   'check task is running or waiting or stop, need to verify
+#Define CHECK_TASK_STATE(x)  (TaskState(x) = 0 Or TaskState(x) = 5)   'check task is running or waiting or stop, need to verify
 #Define SHIFT_POSITION             P101                                   '^ 1 means not running and 0 means running  
 
 

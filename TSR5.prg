@@ -4,16 +4,17 @@
 #include "ErrorHandling.prg"
 #include "Queue.prg"
 
-String completed_cmd_string$ = "" 'L30$
-Int32 pasered_count = 0 'L3%
-Int32 args_count = 0 'L5%
-String cmd_id$ = ""
-String cmd_name$ = ""
-Int32 cmd_fields_limit_count = ARGS_UPPER_LIMIT - 2
-Int32 cmd_args_limit_count = ARGS_UPPER_LIMIT - 4
-
+String completed_cmd_string$
+Int32 pasered_count 
+Int32 args_count 
+String cmd_id$ 
+String cmd_name$ 
+Int32 cmd_fields_limit_count
+Int32 cmd_args_limit_count
 
 Function Main
+	cmd_fields_limit_count = ARGS_UPPER_LIMIT - 2
+	cmd_args_limit_count = ARGS_UPPER_LIMIT - 4
     TSR5_STATUS = 1
 	Do While 1
 		START:
@@ -60,7 +61,7 @@ Function ParseCmd()
 		If(pos_of_comma > 0 And pos_of_comma <= string_size) Then
 			PARSE_CMD_TEMP$(pasered_count) = Left$(temp_handling_string$, pos_of_comma - 1)
 			pasered_count = pasered_count + 1
-			If(pasered_count >= cmd_fields_limit_count) Then					'todo: do not understand cmd_fields_limit_count
+			If(pasered_count >= cmd_fields_limit_count) Then			
 			    pasered_count = pasered_count + 1
 				GOTO L_END
 			Else

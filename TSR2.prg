@@ -1,9 +1,10 @@
 '!TITLE "I/O Position Check Task  "
 #include "Public.inc"
 #include "Queue.prg"
-String cmd_response_string$ = ""
-String new_input_status$ = ""
-String new_output_status$ = ""
+
+String cmd_response_string$
+String new_input_status$
+String new_output_status$
 
 Function Main
 	String old_input_status$ = ""

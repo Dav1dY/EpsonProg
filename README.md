@@ -12,8 +12,6 @@ TSR1:
 TSR2:
     InputIo():
         1.need change PARALLEL_IO_INPUT_START to real io start position
-    OutputIo():
-        1.need to check does Out() function change output status or just read io
 
 TSR3:
     Done
@@ -34,7 +32,6 @@ RobotTask：
     Main:
         1.confirm if sm equals to Waitpos
     MoveAction():
-        3.donnt understand accuracy and @ symbol's meaning
         4.in move command, when pos_id=0, why use position dev to move but not directly use dest postion to move?
         5.donnt understand what Dev(RealPos,shift_position) + shift_position means, does it doubled shift_position's value or make it to be RealPos again?
         6.does waitPos equals to arrive 100? and can use waitPos as Motioncomplete?
