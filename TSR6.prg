@@ -15,7 +15,7 @@ String error_messages$(ERRORMESSAGE_UPPER_LIMIT,ERRORMESSAGE_UPPER_LIMIT)
 
 Function Main
 
-	Xqt ErrorHandling( error_messages$ )
+	Call ErrorHandling( error_messages$ )
     Int32 count1 = 0
     Int32 cmd_args_limit_count 
     cmd_args_limit_count = ARGS_UPPER_LIMIT - 4
@@ -35,7 +35,7 @@ Function Main
         EndIf
         POP:
 		If NM_FRONT - NM_BACK <> 0 Then ' queue is not empty
-			Xqt PopNonMotionCmdQueue()                                                      'todo: to check
+			Call PopNonMotionCmdQueue()                                                      'todo: to check
             command_id$ = NM_CMD$(NM_CMD_START)
             command_name$ = NM_CMD$(NM_CMD_START + 1)
             command_raw$ = NM_CMD$(NM_CMD_START + 2)
@@ -50,24 +50,24 @@ Function Main
             EndIf
 
             If command_args_count < 0 Then
-                Xqt InvalidCmd()
+                Call InvalidCmd()
             ElseIf command_args_count > cmd_args_limit_count Then
-                Xqt ArgsCountExceed()
+                Call ArgsCountExceed()
             Else
                 If command_name$ = "WI" Then
-                    Xqt WaitInput()
+                    Call WaitInput()
                 ElseIf command_name$ = "SO" Then
-                    Xqt SetOutput()
+                    Call SetOutput()
                 ElseIf command_name$ = "CI" Then
-                    Xqt CheckInput()
+                    Call CheckInput()
                 ElseIf command_name$ = "QIO" Then
-                    Xqt QueryIo()
+                    Call QueryIo()
                 ElseIf command_name$ = "QIOM" Then
-                    Xqt QueryIoMapping()
+                    Call QueryIoMapping()
                 ElseIf command_name$ = "QC" Then
-                    Xqt QueryConfig()
+                    Call QueryConfig()
                 Else
-                    Xqt UnknownCmd()
+                    Call UnknownCmd()
                 EndIf
             EndIf
 
@@ -103,13 +103,13 @@ Function QueryIo() As String
 	String input_string$
 	String output_string$
 
-	For io_count_input = PARALLEL_IO_INPUT_START To PARALLEL_IO_INPUT_END Step 8          'todo: IO_ARRAY useless, change IO and delete this
-		io_value_input = In(IO_ARRAY(io_count_input))
+	For io_count_input = PARALLEL_IO_INPUT_START To PARALLEL_IO_INPUT_END Step 8        
+		io_value_input = In(io_count_input)
 		input_string$ = Hex$(io_value_input) + input_string$
 	Next
 
-	For io_count_input = PARALLEL_IO_INPUT_START To PARALLEL_IO_INPUT_END Step 8          'todo: IO_ARRAY useless, change IO and delete this
-		io_value_input = Out(IO_ARRAY(io_count_input))
+	For io_count_input = PARALLEL_IO_INPUT_START To PARALLEL_IO_INPUT_END Step 8       
+		io_value_input = Out(io_count_input)
 		input_string$ = Hex$(io_value_input) + input_string$
 	Next
 
@@ -128,9 +128,9 @@ Function SetOutput() As String
         If set_output_index >= PARALLEL_IO_OUTPUT_START And set_output_index <= PARALLEL_IO_OUTPUT_END Then
             expected_value = Val(nm_args$(loop_count))
             If expected_value = 1 Then
-                On IO_ARRAY(set_output_index)                      
+                On set_output_index                     
             Else
-                Off IO_ARRAY(set_output_index)
+                Off set_output_index
 			EndIf
         ElseIf (set_output_index >= MINI_IO_OUTPUT_START And set_output_index <= MINI_IO_OUTPUT_END) or (set_output_index >= HAND_IO_OUTPUT_START And set_output_index <= HAND_IO_OUTPUT_END) Then
             Goto SO_INVALID
@@ -200,7 +200,7 @@ Function WaitInput() As String
         loop_count = 2
         Do While loop_count <= wait_input_args_count
             reply_index = loop_count + 1
-            present_value = In(IO_ARRAY(WAIT_IO_INDEX + loop_count))                                            'todo: check IO[]
+            present_value = In(WAIT_IO_INDEX + loop_count)                                   
             If present_value <> WAIT_IO_ARRAY(WAIT_IO_VALUE + loop_count) Then
                 message_string$ = message_string$ + nm_args$(reply_index) + "," + Str$(present_value) + ","
                 wait_result = 0
@@ -271,7 +271,7 @@ Function CheckInput() As String
         check_index = Val(nm_args$(check_index_num) + PARALLEL_IO_INPUT_START)
         check_value = Val(nm_args$(check_value_num))
         If (check_index >= MINI_IO_INPUT_START And check_index <= MINI_IO_INPUT_END) or (check_index >= HAND_IO_INPUT_START And check_index <= HAND_IO_INPUT_END) or (check_index >= PARALLEL_IO_INPUT_START And check_index <= PARALLEL_IO_INPUT_END) Then
-            actual_value = In(IO_ARRAY(check_index))                                
+            actual_value = In(check_index)                                
         Else
             check_result = 0
             Goto CI_INDEX_E

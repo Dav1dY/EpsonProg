@@ -1,19 +1,17 @@
 to be done：
 Overall:
-    1.need to merge all prgs together and change some Xqt to Call
-    2.change ErrorHandling function to a global string array
-    3.need to define an IO[] array based on real io
+    2.change ErrorHandling function to a global string array later// need test whether can define and init an array in inc file
 
 TSR0:
     Done, check if robot serial number can be used as controller serial number
 
 TSR1:
     QueryIoMapping():
-        1.why use variant here, why just define a new string as output and put everything in it?
+        1.why use variant here, why not just define a new string as output and put everything in it?
 
 TSR2:
     InputIo():
-        1.IO_ARRAY is useless, change PARALLEL_IO_INPUT_START to zero and delete this
+        1.need change PARALLEL_IO_INPUT_START to real io start position
     OutputIo():
         1.need to check does Out() function change output status or just read io
 
@@ -28,7 +26,7 @@ TSR5:
 
 TSR6:
     QueryIo():
-        1. change to use InputIo() in TSR2 later after merge
+        1. can use InputIo() in TSR2
     WaitInput():
         1. need to check if Time(2) can return a double value when return variable set to double
 

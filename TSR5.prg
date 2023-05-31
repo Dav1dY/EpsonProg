@@ -31,7 +31,7 @@ Function Main
         POP:
 		If CMD_RECV_FRONT - CMD_RECV_BACK <> 0 Then ' queue is not empty
             completed_cmd_string$ = PopCmdRecvQueue()
-			Xqt ParseCmd()
+			Call ParseCmd()
 			GOTO POP
 	    Else
 			Wait 0.005
@@ -81,9 +81,9 @@ Function ParseCmd()
 
 	If Len(cmd_name$) > 3 And Left$(cmd_name$,3) = "NM_" Then
 		cmd_name$ = Right$(cmd_name$, Len(cmd_name$) - 3)
-		Xqt PushNonMotionCmdQueue(cmd_id$,cmd_name$,completed_cmd_string$,args_count)
+		Call PushNonMotionCmdQueue(cmd_id$,cmd_name$,completed_cmd_string$,args_count)
 	Else
-    	Xqt PushMotionCmdQueue(cmd_id$,cmd_name$,completed_cmd_string$,args_count)
+    	Call PushMotionCmdQueue(cmd_id$,cmd_name$,completed_cmd_string$,args_count)
 	EndIf
 
 End Sub

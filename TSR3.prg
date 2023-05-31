@@ -79,7 +79,7 @@ Function Main
                 pos_end_index = InStr(temp_handling_string$,"#")
                 If (pos_end_index > 0 And pos_end_index <= temp_handling_msg_size) Then
                     completed_command_string$ = incomplete_command_string$ + Left$(temp_handling_string$,pos_end_index - 1)
-                    Xqt PushCmdToRecvQueue(completed_command_string$)
+                    Call PushCmdToRecvQueue(completed_command_string$)
                     completed_command_string$ = ""
 					temp_for_right = temp_handling_msg_size - pos_end_index
                     temp_handling_string$ = Right$(temp_handling_string$,temp_for_right)

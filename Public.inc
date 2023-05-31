@@ -42,7 +42,7 @@ String DEV_APP_SW$ = "NA"
 #Define HAND_IO_OUTPUT_END         71
 #Define INTERNAL_IO_START          128
 #Define INTERNAL_IO_END            511
-#Define PARALLEL_IO_INPUT_START    3584
+#Define PARALLEL_IO_INPUT_START    3584                             'need change later
 #Define PARALLEL_IO_INPUT_END      3623
 #Define PARALLEL_IO_OUTPUT_START   3840
 #Define PARALLEL_IO_OUTPUT_END     3887
@@ -95,7 +95,6 @@ Global Int32 TSR6_REQUEST_STATUS        '34
 Global Int32 WAIT_IO_INDEX              '0
 Global Int32 WAIT_IO_VALUE              '1
 Global Int32 WAIT_IO_ARRAY(100)         'new
-Global Int32 IO_ARRAY(100)              'equals to IO[] in Denso
 
 '============S-Variable==================
 Global String IO_UPDATE_CMD$              '30
@@ -124,3 +123,6 @@ Global Double LAST_STOP_POSITION_U       '3`
 Global Double LAST_STOP_POSITION_V       '4
 Global Double LAST_STOP_POSITION_W       '5
 Global Double LAST_STOP_POSITION_J8      '6     note: called j8 in Epson
+
+'============ErrorHandling==================
+Global String ErrorHandling$(3,8)

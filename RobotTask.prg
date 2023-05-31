@@ -17,7 +17,7 @@ String temp_string$ = ""
 String move_args$(ARGS_UPPER_LIMIT)                     'note: change variant to string_size
 
 Function Main
-	Xqt ErrorHandling( error_messages$ )
+	Call ErrorHandling( error_messages$ )
 
 	Do While 1
         If MOTION_REQUESTED = 1 Then
@@ -32,21 +32,21 @@ Function Main
             command_args_count = Val(MOTION_CMD$(MOTION_CMD_START + 3))
 
             If command_name$ = "MV" Then
-                Xqt MoveAction()
+                Call MoveAction()
             ElseIf command_name$ = "SM" Then
                 Wait Motioncomplete                                               'todo: check if Motioncomplete exist in Epson, and what is "SM"
     			WaitPos
                 cmd_response_string$ = command_raw$ + "," + error_messages$(0,0)
             ElseIf command_name$ = "SS" Then
-                Xqt SetSpeed()
+                Call SetSpeed()
             ElseIf command_name$ = "QS" Then
-                Xqt QuerySpeed()
+                Call QuerySpeed()
             ElseIf command_name$ = "QP" Then
-                Xqt QueryPosition()
+                Call QueryPosition()
             ElseIf command_name$ = "QCD" Then
-                Xqt QueryCoordinate()
+                Call QueryCoordinate()
             Else
-                Xqt UnknownCmd()
+                Call UnknownCmd()
             EndIf
 
 			MOTION_RESPONSE$ = cmd_response_string$

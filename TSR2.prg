@@ -87,8 +87,8 @@ Function InputIo() As String
 	Int32 io_count_input
 	String input_string$
 
-	For io_count_input = PARALLEL_IO_INPUT_START To PARALLEL_IO_INPUT_END Step 8          'todo: IO_ARRAY useless, change IO and delete this
-		io_value_input = In(IO_ARRAY(io_count_input))
+	For io_count_input = PARALLEL_IO_INPUT_START To PARALLEL_IO_INPUT_END Step 8   
+		io_value_input = In(io_count_input)
 		input_string$ = Hex$(io_value_input) + input_string$
 	Next
 
@@ -101,8 +101,8 @@ Function OutputIo() As String
 	Int32 io_count_output
 	String output_string$
 
-	For io_count_input = PARALLEL_IO_INPUT_START To PARALLEL_IO_INPUT_END Step 8          'todo: IO_ARRAY useless, change IO and delete this
-		io_value_input = Out(IO_ARRAY(io_count_input))
+	For io_count_input = PARALLEL_IO_INPUT_START To PARALLEL_IO_INPUT_END Step 8      
+		io_value_input = Out(io_count_input)
 		input_string$ = Hex$(io_value_input) + input_string$
 	Next
 
