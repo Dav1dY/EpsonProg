@@ -7,14 +7,17 @@ String new_input_status$
 String new_output_status$
 
 Function Main
-	String old_input_status$ = ""
-	String old_output_status$ = ""
-    Int32 previous_run_state = 1
-    Int32 current_run_state = 1
-    Int32 disconnected = 1
-    Int32 reconnected = 0
-    Double previous_updated_io_time = 0                      'note: change to double
-    Double previous_check_position_time = 0
+	String old_input_status$
+	String old_output_status$
+    Int32 previous_run_state
+    previous_run_state = 1
+    Int32 current_run_state
+    current_run_state = 1
+    Int32 disconnected
+    disconnected = 1
+    Int32 reconnected
+    Double previous_updated_io_time                     'note: change to double
+    Double previous_check_position_time
 
     TSR2_STATUS = 1
     IO_UPDATE_CMD$ = ""
@@ -82,7 +85,7 @@ Function Main
 	Loop
 Fend
 
-Function InputIo() As String
+Function InputIo$() As String
 	Int32 io_value_input
 	'Int32 io_total_input
 	Int32 io_count_input
@@ -96,7 +99,7 @@ Function InputIo() As String
 	new_input_status$ = input_string$
 Fend
 
-Function OutputIo() As String
+Function OutputIo$() As String
 	Int32 io_value_output
 	'Int32 io_total_output
 	Int32 io_count_output

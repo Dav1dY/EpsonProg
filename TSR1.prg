@@ -107,7 +107,7 @@ Fend
 
 
 '---------- Function ----------
-Function RequestMotion() As String
+Function RequestMotion$() As String
     If ERROR_FLAG <> 0 Then
         Call ErrorState()
     ElseIf MOTION_STARTED = 1 And MOTION_FINISHED = 0 Then
@@ -119,7 +119,7 @@ Function RequestMotion() As String
     EndIf
 Fend
 
-Function RunMotion() As String
+Function RunMotion$() As String
     MOTION_REQUESTED = 1
 
     Do Until MOTION_REQUESTED = 0 Or (Stat(0) And AUTOMATION_MODE) <> AUTOMATION_MODE Or CHECK_TASK_STATE(RobotTask) Or MOTION_INIT_DONE = 0
@@ -147,7 +147,7 @@ Function RunMotion() As String
     MOTION_REQUESTED = 0
 Fend
 
-Function QueryIo() As String             
+Function QueryIo$() As String             
 	Int32 io_value_input
 	Int32 io_total_input
 	Int32 io_count_input
@@ -169,7 +169,7 @@ Function QueryIo() As String
 	cmd_response_string$ = command_id$  + "," + "UIO" + "," + input_string$ + "," + output_string$ + "," + error_messages$(0,0)
 Fend
 
-Function SetOutput() As String
+Function SetOutput$() As String
     Int32 set_output_index = 0
     Int32 expected_value = 0
 	If command_args_count < 2 Or command_args_count Mod 2 <> 0 Then
@@ -226,7 +226,7 @@ Function SetOutput() As String
     SO_END:
 Fend
 
-Function WaitInput() As String
+Function WaitInput$() As String
     Double running_secs = 0     'todo: change single to double
     Int32 wait_result = 0
     Int32 timeout_flag = 0
@@ -317,13 +317,13 @@ Function WaitInput() As String
     If error_enabled = 1 Then
         ERROR_FLAG = 1
     EndIf
-    cmd_response_string$ = command_id$ + "," + command_name + "," + message_string$ + error_messages$(IRROR_TYPE,ERROR_NUM)
+    cmd_response_string$ = command_id$ + "," + command_name$ + "," + message_string$ + error_messages$(IRROR_TYPE,ERROR_NUM)
     Goto END_WI
 
     END_WI:
 Fend
 
-Function CheckInput() As String
+Function CheckInput$() As String
     Int32 check_result = 0
     Int32 check_input_args_count = 0
     String message_string$ = ""
@@ -426,11 +426,11 @@ Function DelaySecs() As String
     END_DL:
 Fend
 
-Function QueryConfig() As String
+Function QueryConfig$() As String
 	cmd_response_string$ = command_id$ +  "," + "UC" + "," + DEV_VENDER$ + "," + DEV_MODEL$ + "," + DEV_IP$ + "," + DEV_OS_VER$ + "," + DEV_APP_SW$ + "," + DEV_PROTO_VER$ + "," + DEV_SERIAL_NUM$   + "," + error_messages$(0,0)
 Fend
 
-Function QueryIoMapping() As String
+Function QueryIoMapping$() As String
 	String IO_MAP_SETTING$(1)
 	Int32 count_di = 0
 	Int32 count_do = 0
@@ -446,14 +446,14 @@ Function QueryIoMapping() As String
 	cmd_response_string$ = command_id$ + "," + "UIOM" + "," + tempIoMapStr$ + "," + error_messages$(0,0)
 Fend
 
-Function ClearError() As String
+Function ClearError$() As String
 	ERROR_FLAG = 0
 	IRROR_TYPE = 0
 	ERROR_NUM = 0
     cmd_response_string$ = command_id$ + "," + "CE" + "," + error_messages$(0,0)
 Fend
 
-Function QueryError() As String
+Function QueryError$() As String
 	If ERROR_FLAG = 0 Then
 		cmd_response_string$ = command_id$ + "," + "RE" + "," + error_messages$(0,0)
 	Else
@@ -461,7 +461,7 @@ Function QueryError() As String
 	EndIf
 Fend
 
-Function ProgramStopped() As String
+Function ProgramStopped$() As String
     If (Stat(0) And SYS_ESTOP) = SYS_ESTOP  Then
         Call ProgramStoppedEStop()
     ElseIf (Stat(0) And AUTOMATION_MODE) <> AUTOMATION_MODE Then
@@ -471,70 +471,70 @@ Function ProgramStopped() As String
     EndIf
 Fend
 
-Function ProgramStoppedEStop() As String
+Function ProgramStoppedEStop$() As String
     ERROR_FLAG = 1
     IRROR_TYPE = 1
     ERROR_NUM = 1
     cmd_response_string$ = command_raw$ + "," + error_messages$(IRROR_TYPE,ERROR_NUM)
 Fend
 
-Function ProgramStoppedManualMode() As String
+Function ProgramStoppedManualMode$() As String
     ERROR_FLAG = 1
     IRROR_TYPE = 1
     ERROR_NUM = 2
     cmd_response_string$ = command_raw$ + "," + error_messages$(IRROR_TYPE,ERROR_NUM)
 Fend
 
-Function ProgramUnknownError() As String
+Function ProgramUnknownError$() As String
     ERROR_FLAG = 1
     IRROR_TYPE = 1
     ERROR_NUM = 4
     cmd_response_string$ = command_raw$ + "," + error_messages$(IRROR_TYPE,ERROR_NUM)
 Fend
 
-Function ProgramNotRunning() As String
+Function ProgramNotRunning$() As String
     ERROR_FLAG = 1
     IRROR_TYPE = 1
     ERROR_NUM = 5
     cmd_response_string$ = command_raw$ + "," + error_messages$(IRROR_TYPE,ERROR_NUM)
 Fend
 
-Function ErrorState() As String
+Function ErrorState$() As String
     ERROR_FLAG = 1
     IRROR_TYPE = 1
     ERROR_NUM = 6
     cmd_response_string$ = command_raw$ + "," + error_messages$(IRROR_TYPE,ERROR_NUM)
 Fend
 
-Function MotionOnGoing() As String
+Function MotionOnGoing$() As String
     ERROR_FLAG = 1
     IRROR_TYPE = 1
     ERROR_NUM = 7
     cmd_response_string$ = command_raw$ + "," + error_messages$(IRROR_TYPE,ERROR_NUM)
 Fend
 
-Function MotionInit() As String
+Function MotionInit$() As String
     ERROR_FLAG = 1
     IRROR_TYPE = 1
     ERROR_NUM = 8
     cmd_response_string$ = command_raw$ + "," + error_messages$(IRROR_TYPE,ERROR_NUM)
 Fend
 
-Function UnknownCmd() As String
+Function UnknownCmd$() As String
     ERROR_FLAG = 1
     IRROR_TYPE = 2
     ERROR_NUM = 5
     cmd_response_string$ = command_raw$ + "," + error_messages$(IRROR_TYPE,ERROR_NUM)
 Fend
 
-Function ArgsCountExceed() As String
+Function ArgsCountExceed$() As String
     ERROR_FLAG = 1
     ERROR_TYPE = 2
     ERROR_NUM = 6
     cmd_response_string$ = command_raw$ + "," + error_messages$(ERROR_TYPE,ERROR_NUM)
 Fend
 
-Function InvalidCmd() As String
+Function InvalidCmd$() As String
     ERROR_FLAG = 1
     ERROR_TYPE = 2
     ERROR_NUM = 7

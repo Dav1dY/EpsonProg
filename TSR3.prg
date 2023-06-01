@@ -5,13 +5,14 @@
 #include "Queue.prg"
 
 Function Main
-    String recv_msg_str$ = ""
-    Int32 recv_msg_size = 0
-    String completed_command_string$ = ""
-    Int32 string_limited_size = 198                     'todo: why 198? can change in Epson?
-    Int32 handled_size = 0
-    Int32 handling_size = 0
-	Int32 timeout_secs = 0
+    String recv_msg_str$
+    Int32 recv_msg_size
+    String completed_command_string$
+    Int32 string_limited_size                                   'todo: why 198? can change in Epson?
+    string_limited_size = 198
+    Int32 handled_size
+    Int32 handling_size
+	Int32 timeout_secs
 
     TSR3_STATUS = 1
     RECVCONN_STATUS = 0
@@ -66,13 +67,15 @@ Function Main
                 Goto SPLIT_END
             EndIf
 
-            Int32 temp_handling_msg_size = 0
-            String temp_handling_string$ = ""
-            Int32 pos_end_index = 0
-            String incomplete_command_string$= ""
-			Int32 temp_for_right = 0
+            Int32 temp_handling_msg_size
+            String temp_handling_string$
+            Int32 pos_end_index
+            String incomplete_command_string$
+			Int32 temp_for_right
+
             completed_command_string$ = ""
             temp_handling_string$ = recv_msg_str$
+            
             SPLIT_START:
             temp_handling_msg_size = Len(temp_handling_string$)
             If (temp_handling_msg_size > 0) Then

@@ -5,15 +5,15 @@
 #include "Queue.prg"
 
 Function Main
-    String temp_handling_string$ = ""
-	String pop_string$ = ""
-	Int32 string_size = 0
-	Int32 queue_size = 0
-	Int32 timeout_secs = 0
-	Int32 comm_opened = 0
-	Int32 send_bytes = 0
-	Int32 test = 0
-	String test2$ = ""
+    String temp_handling_string$ 
+	String pop_string$
+	Int32 string_size
+	Int32 queue_size
+	Int32 timeout_secs
+	Int32 comm_opened
+	Int32 send_bytes
+	Int32 test
+	String test2$
     TSR4_STATUS = 1
     SENDCONN_STATUS = 0
 

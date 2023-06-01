@@ -1,6 +1,6 @@
 '!TITLE "Error Handling"
 
-Function ErrorHandling( error_messages$() As String ) As String                        'todo: check use ()or[], need compile
+Function ErrorHandling$(ByRef error_messages$() As String ) As String             
 
 	error_messages$(0,0) = "0,Success"
 	

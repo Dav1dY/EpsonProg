@@ -45,14 +45,15 @@ Fend
 
 Function ParseCmd()                                                                    
 
-	String temp_handling_string$ = "" 	'completed_cmd_string
-	Int32 pos_of_comma = 0 'L2% started from 0
-	Int32 agrs_index = 4
-	Int32 string_size = 0
-	String left_temp_string$ = ""
+	String temp_handling_string$ 	'completed_cmd_string
+	Int32 pos_of_comma 				'L2% started from 0
+	Int32 agrs_index
+	agrs_index = 4
+	Int32 string_size
+	String left_temp_string$
 
 	temp_handling_string$ = completed_cmd_string$
-	pasered_count = 0              'pasered count
+	pasered_count = 0
 
 	L_START:
 	string_size = Len(temp_handling_string$)

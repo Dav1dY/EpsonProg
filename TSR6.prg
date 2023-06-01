@@ -4,19 +4,19 @@
 #include "ErrorHandling.prg"
 #include "Queue.prg"
 
-String cmd_response_string$ = ""
-Int32 loop_count 
-String command_id$ = ""
-String command_name$ = ""
-String command_raw$ = ""
-Int32 command_args_count = 0
+String cmd_response_string$
+Int32 loop_count
+String command_id$
+String command_name$
+String command_raw$
+Int32 command_args_count
 String nm_args$(ARGS_UPPER_LIMIT)
 String error_messages$(ERRORMESSAGE_UPPER_LIMIT,ERRORMESSAGE_UPPER_LIMIT)
 
 Function Main
 
 	Call ErrorHandling( error_messages$ )
-    Int32 count1 = 0
+    Int32 count1
     Int32 cmd_args_limit_count 
     cmd_args_limit_count = ARGS_UPPER_LIMIT - 4
 
@@ -93,7 +93,7 @@ Fend
 
 '---------- Function ----------
 
-Function QueryIo() As String
+Function QueryIo$() As String
 	Int32 io_value_input
 	'Int32 io_total_input
 	Int32 io_count_input
@@ -116,7 +116,7 @@ Function QueryIo() As String
 	cmd_response_string$ = command_id$  + "," + "UPDATE_IO" + "," + input_string$ + "," + output_string$ + "," + error_messages$(0,0)
 Fend
 
-Function SetOutput() As String
+Function SetOutput$() As String
     Int32 set_output_index = 0
     Int32 expected_value = 0
 	If command_args_count < 2 or command_args_count MOD 2 <> 0 Then
@@ -161,18 +161,18 @@ Function SetOutput() As String
     SO_END:
 Fend
 
-Function WaitInput() As String
-    Double running_secs = 0                     
-    Int32 wait_result = 0
-    Int32 timeout_flag = 0
-    Int32 wait_input_args_count = 0
-    Double timeout_secs = 0
-    String header_string$ = ""
-    String message_string$ = ""
-    Int32 reply_index = 0
-    Int32 present_value = 0
-    Double use_secs = 0
-    Int32 error_enabled = 0
+Function WaitInput$() As String
+    Double running_secs             
+    Int32 wait_result
+    Int32 timeout_flag
+    Int32 wait_input_args_count
+    Double timeout_secs
+    String header_string$ 
+    String message_string$ 
+    Int32 reply_index
+    Int32 present_value
+    Double use_secs
+    Int32 error_enabled
 
     running_secs = Time(2)
     wait_result = 1
@@ -247,7 +247,7 @@ Function WaitInput() As String
     END_WI:
 Fend
 
-Function CheckInput() As String
+Function CheckInput$() As String
     Int32 check_result = 0
     Int32 check_input_args_count = 0
     String message_string$ = ""
@@ -310,14 +310,14 @@ Function CheckInput() As String
 	END_CI:
 Fend
 
-Function QueryConfig() As String
+Function QueryConfig$() As String
 	cmd_response_string$ = command_id$ +  "," + "UC" + "," + DEV_VENDER$ + "," + DEV_MODEL$ + "," + DEV_IP$ + "," + DEV_OS_VER$ + "," + DEV_APP_SW$ + "," + DEV_PROTO_VER$ + "," + DEV_SERIAL_NUM$ + "," + error_messages$(0,0)
 Fend
 
-Function QueryIoMapping() As String
+Function QueryIoMapping$() As String
     String IO_MAP_SETTING$(1)
-	Int32 count_di = 0
-	Int32 count_do = 0
+	Int32 count_di
+	Int32 count_do
 	count_di = PARALLEL_IO_INPUT_END - PARALLEL_IO_INPUT_START + 1
 	count_do = PARALLEL_IO_OUTPUT_END - PARALLEL_IO_OUTPUT_START + 1
 

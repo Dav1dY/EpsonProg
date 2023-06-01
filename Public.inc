@@ -52,9 +52,9 @@ String DEV_APP_SW$
 
 
 '============I-Variable==================
-Global Int32 CMD_RECV_FRONT             '0                        
-Global Int32 CMD_RECV_BACK              '1                               
-Global Int32 BG_TASK_COUNT              '2                             
+Global Int32 CMD_RECV_FRONT             '0
+Global Int32 CMD_RECV_BACK              '1
+Global Int32 BG_TASK_COUNT              '2
 Global Int32 MOTION_REPLY_SEND          '3                               'unused
 Global Int32 MOTION_FRONT               '4
 Global Int32 MOTION_BACK                '5
@@ -62,7 +62,7 @@ Global Int32 NM_FRONT                   '6
 Global Int32 NM_BACK                    '7
 Global Int32 CMD_SEND_FRONT             '8
 Global Int32 CMD_SEND_BACK              '9
-Global Int32 ERROR_FLAG                 '10                             
+Global Int32 ERROR_FLAG                 '10
 Global Int32 ERROR_TYPE                 '11
 Global Int32 ERROR_NUM                  '12
 Global Int32 MOTION_INIT_DONE           '13
@@ -118,7 +118,7 @@ Global String PARSE_CMD_TEMP$(30)
 Global Double LAST_STOP_POSITION_X       '0
 Global Double LAST_STOP_POSITION_Y       '1
 Global Double LAST_STOP_POSITION_Z       '2
-Global Double LAST_STOP_POSITION_U       '3`
+Global Double LAST_STOP_POSITION_U       '3
 Global Double LAST_STOP_POSITION_V       '4
 Global Double LAST_STOP_POSITION_W       '5
 Global Double LAST_STOP_POSITION_J8      '6     note: called j8 in Epson

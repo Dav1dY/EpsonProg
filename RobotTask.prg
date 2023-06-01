@@ -8,7 +8,7 @@
 
 String cmd_response_string$
 Int32 loop_count 
-String error_messages$(ERRORMESSAGE_UPPER_LIMIT,ERRORMESSAGE_UPPER_LIMIT )
+String error_messages$(ERRORMESSAGE_UPPER_LIMIT,ERRORMESSAGE_UPPER_LIMIT)
 String command_id$
 String command_name$
 String command_raw$
@@ -17,7 +17,7 @@ String temp_string$
 String move_args$(ARGS_UPPER_LIMIT)                     'note: change variant to string_size
 
 Function Main
-	Call ErrorHandling( error_messages$ )
+	Call ErrorHandling(error_messages$)
 
 	Do While 1
         If MOTION_REQUESTED = 1 Then
@@ -59,34 +59,35 @@ Function Main
 Fend
 '---------- Function ----------
 Function MoveAction () As String
-    Int32 string_size  = 0
-    Int32 pos_of_colon  = 0
-    Int32 pos_id  = 0
-    Int32 tool_num  = 0
-    Int32 speed_value  = 0
-    Int32 accel_value  = 0
-    Int32 accuracy_value  = 0
-    String shift_position_id$  = ""
-    Int32 loop_count2  = 1
-    Int32 shift_parsing_done_flag  = 0
-    String temp_parsing_string$  = ""
-    Int32 temp_parsing_size  = 0
-    Int32 check_index  = 0
-    String temp_shift_string$  = ""
-    Int32 pos_of_add_minus  = 0
-    Int32 shift_size = 0
-    String shift_coordinate$  = ""
-    Double shift_value = 0
-    Double shift_x = 0                                  
-    Double shift_y = 0
-    Double shift_z = 0
-    Double shift_u = 0
-    Double shift_v = 0
-    Double shift_w = 0
-    Double shift_j8 = 0      
+    Int32 string_size
+    Int32 pos_of_colon
+    Int32 pos_id
+    Int32 tool_num
+    Int32 speed_value
+    Int32 accel_value
+    Int32 accuracy_value
+    String shift_position_id$
+    Int32 loop_count2
+    loop_count2  = 1
+    Int32 shift_parsing_done_flag
+    String temp_parsing_string$
+    Int32 temp_parsing_size
+    Int32 check_index
+    String temp_shift_string$
+    Int32 pos_of_add_minus
+    Int32 shift_size
+    String shift_coordinate$
+    Double shift_value
+    Double shift_x                        
+    Double shift_y
+    Double shift_z
+    Double shift_u
+    Double shift_v
+    Double shift_w
+    Double shift_j8
     'Dim shift_position As Position                                   note: SHIFT_POSITION->P101
     P101 =  XY(0, 0, 0, 0, 0, 0) :S(0)                           
-    String accuracy_type$  = ""
+    String accuracy_type$
 
 	If command_args_count < 1 Then
 		Goto MOVE_CNT_E
@@ -186,7 +187,7 @@ Function MoveAction () As String
                     shift_j8 = shift_j8 + shift_value                   
                 EndIf
                 If shift_parsing_done_flag = 1 Then
-                    P101 = (shift_x,shift_y,shift_z,shift_u,shift_v,shift_w) :S(shift_j8)
+                    P101 = XY(shift_x,shift_y,shift_z,shift_u,shift_v,shift_w) :S(shift_j8)
                     Goto SHIFT_END
                 Else
                     Goto SHIFT_LOOP
@@ -211,7 +212,7 @@ Function MoveAction () As String
 
 		Motor On
 		'TAKEARM 1                   todo: check if takearm exits in Epson
-        TLSet tool_num              'todo: may be difference
+        Tool tool_num              'todo: may be difference
 
         If move_args$(8) = "L" Then                 'todo: where does NEXT in the end of MOVE cmd jump to?
             Speeds 100                              'note: this line may be unnecessary
@@ -224,15 +225,16 @@ Function MoveAction () As String
         Else
             Goto MOVE_INVALID
         EndIf
-		'ARRIVE 100                         'todo: does waitPos equals to arrive 100?
-        WaitPos                         
+		'ARRIVE 100
+        WaitPos
         POSITION_ID$ = shift_position_id$
         MOTION_EXECUTED = 1
         loop_count2 = loop_count2 + 1
     Loop
 
     MOVE_SUCCESS:
-	'Wait Motioncomplete                                                 todo: check if Motioncomplete exist in Epson/ use WaitPos?
+	'Wait Motioncomplete   
+    WaitPos                                              
     cmd_response_string$ = command_raw$ + "," + error_messages$(0,0)
     Goto MOVE_END
 
@@ -331,7 +333,7 @@ Function QueryCoordinate() As String
         If temp_coordinate < 0 Then
             Goto QC_INVALID
         EndIf                                      
-        temp_reply_message$ = temp_reply_message$ + "P" + "," + Str$(temp_coordinate) + "," + Str$(CX(P(temp_coordinate))) + "&" + Str$(CY(P(temp_coordinate))) + "&" + Str$(CZ(P(temp_coordinate))) + "&" + Str$(CU(P(temp_coordinate))) + "&" + Str$(CV(P(temp_coordinate))) + "&" + Str$(CW(P(temp_coordinate))) + "&" + Str$(CS(temp_coordinate))) + ","
+        temp_reply_message$ = temp_reply_message$ + "P" + "," + Str$(temp_coordinate) + "," + Str$(CX(P(temp_coordinate))) + "&" + Str$(CY(P(temp_coordinate))) + "&" + Str$(CZ(P(temp_coordinate))) + "&" + Str$(CU(P(temp_coordinate))) + "&" + Str$(CV(P(temp_coordinate))) + "&" + Str$(CW(P(temp_coordinate))) + "&" + Str$(CS(temp_coordinate)) + ","
 		
     Next
 

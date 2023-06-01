@@ -37,4 +37,4 @@ RobotTask：
         6.does waitPos equals to arrive 100? and can use waitPos as Motioncomplete?
 
 Queue:
-    Done, and need to be careful about function names        
+    1. maybe completed_cmd_string does not need to be cleared everytime?       

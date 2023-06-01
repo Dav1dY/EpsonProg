@@ -1,5 +1,5 @@
 '!TITLE "Check TSR Task"
-#include Public.inc
+#include ”Public.inc“
 
 Function Main
 
@@ -85,7 +85,7 @@ Function Main
 
     DEV_MODEL$ = RobotInfo$(1)
     DEV_OS_VER$ = Str$(CtrlInfo(9))      'special format as number
-    DEV_SERIAL_NUM$ = RobotInfo(4)       'note: function not exist in Epson, only have robot serial number
+    DEV_SERIAL_NUM$ = RobotInfo$(4)       'note: function not exist in Epson, only have robot serial number
 
     'init speed
     DESIRED_SPEED = 5
@@ -155,7 +155,7 @@ Function Main
         old_checkU = Abs(CU(RealPos)) - CU(P(Val(old_pos_id$))) < shift_allowed
         old_checkV = Abs(CV(RealPos)) - CV(P(Val(old_pos_id$))) < shift_allowed
         old_checkW = Abs(CW(RealPos)) - CW(P(Val(old_pos_id$))) < shift_allowed
-        old_checkJ8 = Abs(CS(RealPos)) - CS(P(Val(old_pos_id$)))) < shift_allowed
+        old_checkJ8 = Abs(CS(RealPos)) - CS(P(Val(old_pos_id$))) < shift_allowed
 
         If old_checkX And old_checkY And old_checkZ And old_checkU And old_checkV And old_checkW And old_checkJ8 Then
             POSITION_ID$ = old_pos_id$
@@ -202,7 +202,7 @@ Function Main
 		If CHECK_TASK_STATE(TSR1) Then
 			Quit TSR1
 			Xqt TSR1
-			Wait TaskState(TSR1) = STATUS_RUN,TIMEOUT_TK_REBOOT
+			Wait STATUS_RUN = TaskState(TSR1),TIMEOUT_TK_REBOOT
 			If CHECK_TASK_STATE(TSR1) Then
 				Goto Retry
 			EndIf
@@ -211,7 +211,7 @@ Function Main
 		If CHECK_TASK_STATE(TSR2) Then
 			Quit TSR2
 			Xqt TSR2
-			Wait TaskState(TSR2) = STATUS_RUN,TIMEOUT_TK_REBOOT
+			Wait STATUS_RUN = TaskState(TSR2),TIMEOUT_TK_REBOOT
 			If CHECK_TASK_STATE(TSR2) Then
 				Goto Retry
 			EndIf
@@ -220,7 +220,7 @@ Function Main
 		If CHECK_TASK_STATE(TSR3) Then
 			Quit TSR3
 			Xqt TSR3
-			Wait TaskState(TSR3) = STATUS_RUN,TIMEOUT_TK_REBOOT
+			Wait STATUS_RUN = TaskState(TSR3),TIMEOUT_TK_REBOOT
 			If CHECK_TASK_STATE(TSR3) Then
 				Goto Retry
 			EndIf
@@ -229,7 +229,7 @@ Function Main
 		If CHECK_TASK_STATE(TSR4) Then
 			Quit TSR4
 			Xqt TSR4
-			Wait TaskState(TSR4) = STATUS_RUN,TIMEOUT_TK_REBOOT
+			Wait STATUS_RUN = TaskState(TSR4),TIMEOUT_TK_REBOOT
 			If CHECK_TASK_STATE(TSR4) Then
 				Goto Retry
 			EndIf
@@ -238,7 +238,7 @@ Function Main
 		If CHECK_TASK_STATE(TSR5) Then
 			Quit TSR5
 			Xqt TSR5
-			Wait Status(TSR5) = STATUS_RUN,TIMEOUT_TK_REBOOT
+			Wait STATUS_RUN = Status(TSR5),TIMEOUT_TK_REBOOT
 			If CHECK_TASK_STATE(TSR5) Then
 				Goto Retry
 			EndIf
@@ -247,16 +247,16 @@ Function Main
 		If CHECK_TASK_STATE(TSR6) Then
 			Quit TSR6
 			Xqt TSR6
-			Wait TaskState(TSR6) = STATUS_RUN,TIMEOUT_TK_REBOOT
+			Wait STATUS_RUN = TaskState(TSR6),TIMEOUT_TK_REBOOT
 			If CHECK_TASK_STATE(TSR6) Then
 				Goto Retry
 			EndIf
 		EndIf
 
-		If CHECK_TASK_STATE(RobotTask) And (Stat(0) And AUTOMATION_MODE) = AUTOMATION_MODE And (Stat(0) And SYS_ESTOP) = 0) Then
+		If CHECK_TASK_STATE(RobotTask) And (Stat(0) And AUTOMATION_MODE) = AUTOMATION_MODE And (Stat(0) And SYS_ESTOP) = 0 Then
 			Quit RobotTask                                                               'todo: check if AUTOMATION_MODE=running_task
 			Xqt RobotTask
-			Wait TaskState(RobotTask) = STATUS_RUN,TIMEOUT_TK_REBOOT
+			Wait STATUS_RUN = TaskState(RobotTask),TIMEOUT_TK_REBOOT
 			If CHECK_TASK_STATE(RobotTask) Then
 				Goto Retry
 			EndIf
